@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
+#include <SFML/Graphics/View.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <climits>
@@ -17,11 +18,12 @@
 
 void EngineClass::initWindow() {
 
-  window.create(sf::VideoMode({800, 600}, sf::Style::Resize), "My window",
+  window.create(sf::VideoMode({1920, 1080}, sf::Style::Resize), "My window",
                 sf::State::Windowed);
 
   window.setVerticalSyncEnabled(true);
   window.setFramerateLimit(60);
+
 
   createTileMap();
 
@@ -35,15 +37,14 @@ void EngineClass::mainLoop() {
 
       if (event->is<sf::Event::Closed>()) {
         window.close();
-      } else if (const auto *keyPressed =
-                     event->getIf<sf::Event::KeyPressed>()) {
+      }
+      else if (const auto *keyPressed = event->getIf<sf::Event::KeyPressed>()) {
         if (keyPressed->scancode == sf::Keyboard::Scancode::Escape) {
           window.close();
         }
       }
       if (const auto *resized = event->getIf<sf::Event::Resized>()) {
-        std::cout << "new width " << resized->size.x << std::endl;
-        std::cout << "new height " << resized->size.y << std::endl;
+        window.setSize({resized->size.x, resized->size.y});
       }
     }
     draw();
