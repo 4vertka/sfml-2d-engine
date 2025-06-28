@@ -3,9 +3,12 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <climits>
 #include <exception>
 #include <iostream>
+#include <new>
 #include <stdexcept>
 
 void EngineClass::initWindow() {
@@ -16,7 +19,7 @@ void EngineClass::initWindow() {
   window.setVerticalSyncEnabled(true);
   window.setFramerateLimit(60);
 
-  createTexture();
+  createMeshes();
 }
 
 void EngineClass::mainLoop() {
@@ -43,16 +46,38 @@ void EngineClass::mainLoop() {
 
 void EngineClass::draw() {
   window.clear(sf::Color::Blue);
-  window.draw(createTexture());
+  for (auto &mesh : meshes) {
+    window.draw(drawMesh(mesh));
+  }
   window.display();
 }
 
-sf::Sprite EngineClass::createTexture() {
-  if (!texture.loadFromFile("../textures/forest-2.png")) {
-    throw std::runtime_error("failed to load texture");
-  }
-  texture.setSmooth(true);
-  sf::Sprite sprite(texture);
+void EngineClass::createMeshes() {
+  createMesh("../textures/forest-2.png", {10.0f, 50.0f}, {0.5f, 0.5f});
+  createMesh("../textures/forest-2.png", {100.0f, 100.0f}, {1.0f, 1.0f});
+}
+
+sf::Sprite EngineClass::drawMesh(Mesh &mesh) {
+
+  sf::Sprite sprite(mesh.texture);
+  sprite.setPosition(mesh.position);
+  sprite.scale(mesh.scale);
 
   return sprite;
+}
+
+void EngineClass::createMesh(std::string texturePath, sf::Vector2f position,
+                             sf::Vector2f scale) {
+
+  Mesh newMesh;
+
+  sf::Texture texture;
+  if (!texture.loadFromFile(texturePath)) {
+    throw std::runtime_error("failed to load texture: " + texturePath);
+  }
+  newMesh.texture = texture;
+  newMesh.position = position;
+  newMesh.scale = scale;
+
+  meshes.push_back(newMesh);
 }
