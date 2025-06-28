@@ -1,8 +1,12 @@
 #include "engine.hpp"
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <exception>
 #include <iostream>
+#include <stdexcept>
 
 void EngineClass::initWindow() {
 
@@ -11,6 +15,8 @@ void EngineClass::initWindow() {
 
   window.setVerticalSyncEnabled(true);
   window.setFramerateLimit(60);
+
+  createTexture();
 }
 
 void EngineClass::mainLoop() {
@@ -37,5 +43,16 @@ void EngineClass::mainLoop() {
 
 void EngineClass::draw() {
   window.clear(sf::Color::Blue);
+  window.draw(createTexture());
   window.display();
+}
+
+sf::Sprite EngineClass::createTexture() {
+  if (!texture.loadFromFile("../textures/forest-2.png")) {
+    throw std::runtime_error("failed to load texture");
+  }
+  texture.setSmooth(true);
+  sf::Sprite sprite(texture);
+
+  return sprite;
 }
