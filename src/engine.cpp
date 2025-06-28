@@ -23,9 +23,9 @@ void EngineClass::initWindow() {
   window.setVerticalSyncEnabled(true);
   window.setFramerateLimit(60);
 
-  createMeshes();
-
   createTileMap();
+
+  createMeshes();
 }
 
 void EngineClass::mainLoop() {
@@ -52,10 +52,12 @@ void EngineClass::mainLoop() {
 
 void EngineClass::draw() {
   window.clear(sf::Color::Blue);
+
+  window.draw(map.vertexArray, &map.tileset);
+
   for (auto &mesh : meshes) {
     window.draw(mesh.vertexArray, &mesh.texture);
   }
-  window.draw(map.vertexArray, &map.tileset);
   window.display();
 }
 
@@ -88,11 +90,10 @@ void EngineClass::createTileMap() {
       3, 3, 3, 3, 0, 1, 0, 0, 2, 0, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0, 0, 1,
       1, 0, 3, 3, 3, 0, 0, 0, 1, 1, 1, 2, 0, 0, 0, 0, 1, 0, 3, 0, 2, 2,
       0, 0, 1, 1, 1, 1, 2, 0, 2, 0, 1, 0, 3, 0, 2, 2, 2, 0, 1, 1, 1, 1,
-      1, 1, 0, 0, 1, 0, 3, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1,
-  };
+      1, 1, 0, 0, 1, 0, 3, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1};
 
-  if (!map.load("../textures/sproute/Tilesets/Grass.png", {32, 32},
-                level.data(), 16, 18)) {
+  if (!map.load("../textures/tileset_1bit.png", {16, 16}, level.data(), 22,
+                6)) {
     throw std::runtime_error("failed to load tilemap");
   }
 }

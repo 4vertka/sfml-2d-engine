@@ -1,5 +1,6 @@
 #include "tilemap.hpp"
 #include <SFML/Graphics/PrimitiveType.hpp>
+#include <SFML/System/Vector2.hpp>
 
 bool TileMap::load(const std::filesystem::path &tilesets, sf::Vector2u tileSize,
                    const int *tiles, unsigned int width, unsigned int height) {
@@ -19,17 +20,20 @@ bool TileMap::load(const std::filesystem::path &tilesets, sf::Vector2u tileSize,
 
       sf::Vertex *triangles = &vertexArray[(i + j * width) * 6];
 
-      triangles[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
+      float scale = 4.0f;
+
+      triangles[0].position =
+          sf::Vector2f(i * tileSize.x, j * tileSize.y) * scale;
       triangles[1].position =
-          sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
+          sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y) * scale;
       triangles[2].position =
-          sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
+          sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y) * scale;
       triangles[3].position =
-          sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
+          sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y) * scale;
       triangles[4].position =
-          sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
+          sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y) * scale;
       triangles[5].position =
-          sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
+          sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y) * scale;
 
       triangles[0].texCoords = sf::Vector2f(tu * tileSize.x, tv * tileSize.y);
       triangles[1].texCoords =
