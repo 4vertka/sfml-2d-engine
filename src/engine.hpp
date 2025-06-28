@@ -1,4 +1,5 @@
 #include "mehses.hpp"
+#include "tilemap.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
@@ -13,11 +14,14 @@ public:
   void mainLoop();
   void draw();
   void createMeshes();
-  // sf::Sprite drawMesh(Mesh &mesh);
   void createMesh(std::string texturePath, sf::Vector2f position,
                   sf::Vector2f scale);
+
+  void createTileMap();
 
 private:
   sf::RenderWindow window;
   std::vector<Mesh> meshes;
+
+  TileMap map;
 };
