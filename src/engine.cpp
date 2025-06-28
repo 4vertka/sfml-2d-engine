@@ -1,9 +1,13 @@
 #include "engine.hpp"
+#include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/VertexArray.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <climits>
 #include <exception>
@@ -47,7 +51,7 @@ void EngineClass::mainLoop() {
 void EngineClass::draw() {
   window.clear(sf::Color::Blue);
   for (auto &mesh : meshes) {
-    window.draw(drawMesh(mesh));
+    window.draw(mesh.vertexArray, &mesh.texture);
   }
   window.display();
 }
@@ -57,27 +61,18 @@ void EngineClass::createMeshes() {
   createMesh("../textures/forest-2.png", {100.0f, 100.0f}, {1.0f, 1.0f});
 }
 
-sf::Sprite EngineClass::drawMesh(Mesh &mesh) {
-
-  sf::Sprite sprite(mesh.texture);
-  sprite.setPosition(mesh.position);
-  sprite.scale(mesh.scale);
-
-  return sprite;
-}
-
 void EngineClass::createMesh(std::string texturePath, sf::Vector2f position,
                              sf::Vector2f scale) {
 
   Mesh newMesh;
 
-  sf::Texture texture;
-  if (!texture.loadFromFile(texturePath)) {
+  if (!newMesh.texture.loadFromFile(texturePath)) {
     throw std::runtime_error("failed to load texture: " + texturePath);
   }
-  newMesh.texture = texture;
   newMesh.position = position;
   newMesh.scale = scale;
+
+  newMesh.initPrimitives();
 
   meshes.push_back(newMesh);
 }
