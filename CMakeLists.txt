@@ -5,10 +5,30 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(SFML REQUIRED sfml-graphics)
+pkg_check_modules(SFML REQUIRED sfml-graphics sfml-audio sfml-window sfml-system)
+if(POLICY CMP0072)
+  cmake_policy(SET CMP0072 NEW)
+endif()
+find_package(OpenGL REQUIRED)
 
-add_executable(main ./src/main.cpp ./src/engine.cpp ./src/tilemap.cpp)
+set(IMGUI_SRC
+  ./imgui-sfml/imgui-SFML.cpp
+)
 
-target_include_directories(main PRIVATE ${SFML_INCLUDE_DIRS})
-target_link_libraries(main PRIVATE ${SFML_LIBRARIES})
+add_executable(main
+  ./src/main.cpp
+  ./src/engine.cpp
+  ./src/tilemap.cpp
+  ${IMGUI_SRC}
+)
 
+target_include_directories(main PRIVATE
+  ${SFML_INCLUDE_DIRS}
+  /usr/include
+)
+
+target_link_libraries(main PRIVATE
+  ${SFML_LIBRARIES}
+  imgui
+  OpenGL::GL
+)
