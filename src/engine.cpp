@@ -56,7 +56,7 @@ void EngineClass::mainLoop() {
         window.setSize({resized->size.x, resized->size.y});
       }
     }
-    player.PlayerMainLoop({100.0f, 100.0f}, {4.0f, 4.0f});
+    player.PlayerMainLoop();
     
     draw();
   }

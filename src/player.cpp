@@ -12,20 +12,19 @@
 
 PlayerClass::PlayerClass() : texture("../textures/soldier.png"), sprite(texture) {
 
-  rectangleSourceSprite.position = {0, 0};                  
-  rectangleSourceSprite.size = {100, 100};       
-
   sprite.setTextureRect({{0,0}, {100, 100}});
   sprite.setOrigin({sprite.getTextureRect().size.x / 2.0f, sprite.getTextureRect().size.y / 2.0f});
+  position = {100.0f, 100.0f};
+  scale = {4.0f, 4.0f};
 
 }
 
-void PlayerClass::PlayerMainLoop(sf::Vector2f position, sf::Vector2f scale) {
+void PlayerClass::PlayerMainLoop() {
 
   sprite.setPosition(position);      
   sprite.setScale(scale); 
 
-  timer += 0.1f;
+  timer += 0.05f;
   if (timer >= timerMax) {
     texWidth += 100;
 
@@ -38,16 +37,6 @@ void PlayerClass::PlayerMainLoop(sf::Vector2f position, sf::Vector2f scale) {
     }
 
     timer = 0.0f;
-  }
-    
-  if (clock.getElapsedTime().asSeconds() > 1.0f) {
-    if (rectangleSourceSprite.position == sf::Vector2{500, 0}) {
-      rectangleSourceSprite.position = sf::Vector2{100, 0};
-    }else {
-      rectangleSourceSprite.position += sf::Vector2{100, 0};
-    }
-    sprite.setTextureRect(rectangleSourceSprite);
-    clock.reset();
   }
 }
 
