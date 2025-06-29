@@ -1,17 +1,30 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/PrimitiveType.hpp>
+#include <SFML/Graphics/Rect.hpp>
+#include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Transform.hpp>
 #include <SFML/Main.hpp>
+#include <SFML/System/Angle.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <stdexcept>
+#include <iostream>
 
 class Mesh {
 public:
   sf::Texture texture{};
+  sf::Transform transform{};
   sf::Vector2f position{};
   sf::Vector2f scale{};
   sf::VertexArray vertexArray{};
 
-  void initPrimitives() {
+
+  void initPrimitives(std::string texturePath) {
+  
+    if (!texture.loadFromFile(texturePath)) {                                                
+      throw std::runtime_error("failed to load texture for mesh" + texturePath);             
+    } 
+
     vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleStrip);
     vertexArray.resize(4);
 
@@ -32,5 +45,6 @@ public:
         sf::Vector2f(static_cast<float>(textureSize.x), 0.f);
     vertexArray[3].texCoords = sf::Vector2f(static_cast<float>(textureSize.x),
                                             static_cast<float>(textureSize.y));
+    transform.rotate(sf::degrees(45));
   }
 };

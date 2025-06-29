@@ -8,6 +8,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Window/WindowEnums.hpp>
 #include <optional>
+#include "player.hpp"
 
 class EngineClass {
 public:
@@ -17,7 +18,6 @@ public:
   void createMeshes();
   void createMesh(std::string texturePath, sf::Vector2f position,
                   sf::Vector2f scale);
-
   void createTileMap();
   void cleanup();
   void drawImgui();
@@ -28,4 +28,5 @@ private:
   std::vector<Mesh> meshes;
 
   TileMap map;
+  PlayerClass player;
 };

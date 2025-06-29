@@ -11,11 +11,13 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <climits>
+#include <ctime>
 #include <exception>
 #include <iostream>
 #include <new>
 #include <stdexcept>
 #include "../imgui-sfml/imgui-SFML.h"
+#include "player.hpp"
 #include <imgui.h>
 
 void EngineClass::initWindow() {
@@ -26,10 +28,10 @@ void EngineClass::initWindow() {
   window.setVerticalSyncEnabled(true);
   window.setFramerateLimit(60);
 
-
   createTileMap();
 
-  createMeshes();
+ // createMeshes();
+
 
   if (!ImGui::SFML::Init(window)) {
     throw std::runtime_error("failed to load imgui");
@@ -38,7 +40,6 @@ void EngineClass::initWindow() {
 }
 
 void EngineClass::mainLoop() {
-
   while (window.isOpen()) {
     while (const std::optional event = window.pollEvent()) {
       ImGui::SFML::ProcessEvent(window, *event);
@@ -55,6 +56,8 @@ void EngineClass::mainLoop() {
         window.setSize({resized->size.x, resized->size.y});
       }
     }
+    player.PlayerMainLoop({100.0f, 100.0f}, {4.0f, 4.0f});
+    
     draw();
   }
 
@@ -64,17 +67,22 @@ void EngineClass::mainLoop() {
 void EngineClass::draw() {
   window.clear(sf::Color::White);
   window.draw(map.vertexArray, &map.tileset);
-  for (auto &mesh : meshes) {
-    window.draw(mesh.vertexArray, &mesh.texture);
-  }
+  //for (auto &mesh : meshes) {
+
+    //sf::RenderStates states;
+    //states.texture = &mesh.texture;
+    //states.transform = mesh.transform;
+    //window.draw(mesh.vertexArray, states);
+  //}
+  
+  player.drawPlayer(window);
 
   drawImgui();
   window.display();
 }
 
 void EngineClass::createMeshes() {
-   createMesh("../textures/forest-2.png", {10.0f, 50.0f}, {0.5f, 0.5f});
-   createMesh("../textures/forest-2.png", {100.0f, 100.0f}, {1.0f, 1.0f});
+   createMesh("../textures/soldier.png", {100.0f, 100.0f}, {2.0f, 2.0f});
 }
 
 void EngineClass::createMesh(std::string texturePath, sf::Vector2f position,
@@ -82,13 +90,9 @@ void EngineClass::createMesh(std::string texturePath, sf::Vector2f position,
 
   Mesh newMesh;
 
-  if (!newMesh.texture.loadFromFile(texturePath)) {
-    throw std::runtime_error("failed to load texture: " + texturePath);
-  }
   newMesh.position = position;
   newMesh.scale = scale;
-
-  newMesh.initPrimitives();
+  newMesh.initPrimitives(texturePath);
 
   meshes.push_back(newMesh);
 }
@@ -132,3 +136,5 @@ void EngineClass::drawImgui() {
    
   ImGui::SFML::Render(window);                                     
 }
+
+
