@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
+#include <SFML/System/Clock.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Window/WindowEnums.hpp>
@@ -18,9 +19,12 @@ public:
                   sf::Vector2f scale);
 
   void createTileMap();
+  void cleanup();
+  void drawImgui();
 
 private:
   sf::RenderWindow window;
+  sf::Clock deltaClock;
   std::vector<Mesh> meshes;
 
   TileMap map;
