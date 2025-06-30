@@ -20,6 +20,7 @@ add_executable(main
   ./src/engine.cpp
   ./src/tilemap.cpp
   ./src/player.cpp
+  ./src/camera.cpp
   ${IMGUI_SRC}
 )
 

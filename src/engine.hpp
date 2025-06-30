@@ -9,6 +9,7 @@
 #include <SFML/Window/WindowEnums.hpp>
 #include <optional>
 #include "player.hpp"
+#include "camera.hpp"
 
 class EngineClass {
 public:

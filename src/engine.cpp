@@ -35,7 +35,6 @@ void EngineClass::initWindow() {
 
  // createMeshes();
 
-
   if (!ImGui::SFML::Init(window)) {
     throw std::runtime_error("failed to load imgui");
   } 
@@ -59,7 +58,7 @@ void EngineClass::mainLoop() {
         window.setSize({resized->size.x, resized->size.y});
       }
     }
-    player.PlayerMainLoop();
+    player.update();
     
     draw();
   }
@@ -79,7 +78,7 @@ void EngineClass::draw() {
   //}
   
   map.createTileMap();
-  player.drawPlayer(window);
+  player.draw(window);
 
   drawImgui();
   window.display();
@@ -110,19 +109,6 @@ void EngineClass::drawImgui() {
                                                                     
   ImGui::Begin("Hello world");       
 
-  ImGui::Columns(4, NULL);
-  ImGui::Separator();
-
-  for(int i= 0; i < 16; i++) {
-    ImGui::PushID(i);
-    if (i > 0 && i%4 == 0) ImGui::Separator();
-    ImGui::Button("aboba", ImVec2(100, 100));
-    ImGui::NextColumn();
-    ImGui::PopID();
-  }
-  ImGui::Columns(1);
-  ImGui::Separator();
-   
   ImGui::End();  
   ImGui::SFML::Render(window);                                     
 }

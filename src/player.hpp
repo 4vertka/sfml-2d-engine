@@ -5,28 +5,23 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/System/Vector2.hpp>
-#include <memory>
 #include <string>
+#include "entety.hpp"
 
-class PlayerClass {
+class PlayerClass : public Entety {
   public:
-    enum PlayerDirection{IDLE, UP, DOWN , LEFT, RIGHT};
-    PlayerClass();
-    sf::Texture texture{};
-    sf::Vector2f position{};
-    sf::Vector2f scale{};
+    float speed = 6.0f;
+    //PlayerClass(const std::string& texturePath) {
+    //    loadTexture(texturePath);
+    //}
+
     float playerSpeed{6.0f};
 
     int texWidth {0};
     float timer{0.0f};
     float timerMax = 0.25f;
 
-    void PlayerMainLoop();
-    void drawPlayer(sf::RenderWindow& window);
-    void playerControl();
-    void playerAnimation(PlayerDirection direction, int maxTexturePixel, int texPositionDown);
-    void movePlayer(PlayerDirection direction);
+    void update() override;
+    void playerAnimation(int maxTexturePixel, int texPositionDown);
 
-  private:
-    sf::Sprite sprite;
 };
