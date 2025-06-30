@@ -8,7 +8,9 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/View.hpp>
+#include <SFML/System/Clock.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/Window/Clipboard.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <climits>
 #include <cstdio>
@@ -20,6 +22,7 @@
 #include "../imgui-sfml/imgui-SFML.h"
 #include "player.hpp"
 #include <imgui.h>
+#include <string>
 
 void EngineClass::initWindow() {
 
@@ -123,3 +126,4 @@ void EngineClass::drawImgui() {
   ImGui::End();  
   ImGui::SFML::Render(window);                                     
 }
+
