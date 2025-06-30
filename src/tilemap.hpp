@@ -11,4 +11,6 @@ public:
 
   bool load(const std::filesystem::path &tilesets, sf::Vector2u tileSize,
             const int *tiles, unsigned int width, unsigned int height);
+
+  void createTileMap();                                                                    
 };

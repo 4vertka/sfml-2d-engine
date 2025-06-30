@@ -18,7 +18,6 @@ public:
   void createMeshes();
   void createMesh(std::string texturePath, sf::Vector2f position,
                   sf::Vector2f scale);
-  void createTileMap();
   void cleanup();
   void drawImgui();
 

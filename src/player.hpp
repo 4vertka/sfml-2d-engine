@@ -14,6 +14,9 @@ class PlayerClass {
     sf::Texture texture{};
     sf::Vector2f position{};
     sf::Vector2f scale{};
+    float playerSpeed{6.0f};
+    float changeX{};
+    float changeY{};
 
     int texWidth {0};
     float timer{0.0f};
@@ -21,6 +24,7 @@ class PlayerClass {
 
     void PlayerMainLoop();
     void drawPlayer(sf::RenderWindow& window);
+    void playerControl();
 
   private:
 
