@@ -10,6 +10,7 @@
 
 class PlayerClass {
   public:
+    enum PlayerDirection{IDLE, UP, DOWN , LEFT, RIGHT};
     PlayerClass();
     sf::Texture texture{};
     sf::Vector2f position{};
@@ -25,8 +26,8 @@ class PlayerClass {
     void PlayerMainLoop();
     void drawPlayer(sf::RenderWindow& window);
     void playerControl();
+    void playerAnimation(PlayerDirection direction, int maxTexturePixel, int texPositionDown);
 
   private:
-
     sf::Sprite sprite;
 };
