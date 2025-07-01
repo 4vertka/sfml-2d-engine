@@ -58,7 +58,8 @@ void EngineClass::mainLoop() {
         window.setSize({resized->size.x, resized->size.y});
       }
     }
-    player.update();
+    if (cameraMode) {camera.Update();}
+    else {player.update();}
     
     draw();
   }
@@ -68,6 +69,8 @@ void EngineClass::mainLoop() {
 
 void EngineClass::draw() {
   window.clear(sf::Color::White);
+
+  camera.Render(window);
   window.draw(map.vertexArray, &map.tileset);
   //for (auto &mesh : meshes) {
 
@@ -108,6 +111,11 @@ void EngineClass::drawImgui() {
   ImGui::SFML::Update(window, deltaClock.restart());                
                                                                     
   ImGui::Begin("Hello world");       
+  if (ImGui::Button("playerMode")) {
+    cameraMode = false;
+  }else if (ImGui::Button("cameraMode")) {
+    cameraMode = true;
+  }
 
   ImGui::End();  
   ImGui::SFML::Render(window);                                     

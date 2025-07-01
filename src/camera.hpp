@@ -11,5 +11,6 @@ public:
         void Update();
 private:
         View camera;
+        float cameraSpeed{16.0f};
 };
 

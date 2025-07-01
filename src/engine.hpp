@@ -29,4 +29,6 @@ private:
 
   TileMap map;
   PlayerClass player;
+  Camera camera;
+  bool cameraMode{false};
 };
