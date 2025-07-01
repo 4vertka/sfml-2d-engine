@@ -59,7 +59,7 @@ void EngineClass::mainLoop() {
       }
     }
     if (cameraMode) {camera.Update();}
-    else {player.update();}
+    else {player.update(); camera.updateFollow(player);}
     
     draw();
   }
