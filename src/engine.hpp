@@ -16,7 +16,6 @@ class EngineClass {
 public:
   void initWindow();
   void mainLoop();
-  //void draw();
   void createMeshes();
   void createMesh(std::string texturePath, sf::Vector2f position,
                   sf::Vector2f scale);

@@ -1,6 +1,8 @@
 #include "levelState.hpp"
 #include "levelState.hpp"
 #include "engine.hpp"
+#include "menuState.hpp"
+#include <memory>
 
 void levelState::handleInput(EngineClass& engine,const sf::Event& event) {
   if (event.is<sf::Event::Closed>()) {             
@@ -9,7 +11,10 @@ void levelState::handleInput(EngineClass& engine,const sf::Event& event) {
   else if (const auto *keyPressed = event.getIf<sf::Event::KeyPressed>()) {                   
     if (keyPressed->scancode == sf::Keyboard::Scancode::Escape) {                              
       engine.getWindow().close();                                                                          
-    }                                                                                          
+    } 
+    if (keyPressed->scancode == sf::Keyboard::Scancode::Enter) {                        
+      engine.changeState(std::make_unique<MenuState>());
+    }                                                                                    
   }                                                                                            
   if (const auto *resized = event.getIf<sf::Event::Resized>()) {                              
     engine.getWindow().setSize({resized->size.x, resized->size.y});                                        
