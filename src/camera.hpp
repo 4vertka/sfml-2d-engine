@@ -14,6 +14,5 @@ public:
         sf::View camera;
 private:
         float cameraSpeed{16.0f};
-        float cameraZoom{1.0f};
 };
 
