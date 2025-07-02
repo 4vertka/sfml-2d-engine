@@ -37,6 +37,6 @@ void Camera::Update() {
 }
 
 void Camera::updateFollow(Entety& object) {
-  camera.setCenter(object.getPosition());
+  camera.setCenter({object.getPosition().x + 128, object.getPosition().y });
 }
 
