@@ -30,9 +30,8 @@ void PlayerClass::playerAnimation(int maxTexturePixel, int texPositionDown) {
 }
 }
 
-
 void PlayerClass::update()   {
-  sf::Vector2f movement(0.0f, 0.0f);                                                         
+  sf::Vector2f movement(0,0);                                                         
                                                                                              
   bool left = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A);                              
   bool right = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D);                             

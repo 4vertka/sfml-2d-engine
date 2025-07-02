@@ -28,8 +28,8 @@ public:
   bool cameraMode{false};
 protected:
   sf::RenderWindow window;
-  sf::Clock deltaClock;
   std::vector<Mesh> meshes;
+  sf::Clock deltaClock;
 
   std::unique_ptr<States> currentState;
 };

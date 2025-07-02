@@ -4,15 +4,15 @@
 #include <cmath>
 
 Camera::Camera() {
-  camera.setCenter({0.0f,0.0f});
+  camera.setCenter({500.0f,500.0f});
   camera.setSize({1920.0f, 1080.0f});
 }
 
-void Camera::Render(RenderWindow &window) { window.setView(camera); }
+void Camera::Render(sf::RenderWindow &window) { window.setView(camera); }
 
 void Camera::Update() {
-
-  sf::Vector2f movement(0.0f, 0.0f);                                                            
+  
+  sf::Vector2f movement{};                                                            
                                                                                                 
   bool left = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A);                                 
   bool right = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D);                                
@@ -34,3 +34,4 @@ void Camera::Update() {
 void Camera::updateFollow(Entety& object) {
   camera.setCenter(object.getPosition());
 }
+

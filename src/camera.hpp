@@ -2,17 +2,17 @@
 #include <SFML/Graphics.hpp>
 #include "entety.hpp"
 
-using namespace sf;
 
 class Camera
 {
 public:
         Camera();
-        void Render(RenderWindow &window);
+        void Render(sf::RenderWindow &window);
         void Update();
         void updateFollow(Entety& object);
+
+        sf::View camera;
 private:
-        View camera;
         float cameraSpeed{16.0f};
         float cameraZoom{1.0f};
 };

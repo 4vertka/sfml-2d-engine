@@ -10,7 +10,7 @@
 
 class Entety {
 protected:
-    sf::Vector2f position;       
+    sf::Vector2f position{};       
     sf::Vector2f velocity;       
     sf::Texture texture;         
     sf::Vector2f scale{4.0f, 4.0f};          
@@ -34,5 +34,4 @@ public:
     void move(const sf::Vector2f& deltatime) {this->position += deltatime;}
 
     sf::FloatRect getBounds() const {return this->sprite.getGlobalBounds();}
-
 };

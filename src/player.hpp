@@ -11,9 +11,6 @@
 class PlayerClass : public Entety {
   public:
     float speed = 6.0f;
-    //PlayerClass(const std::string& texturePath) {
-    //    loadTexture(texturePath);
-    //}
 
     float playerSpeed{6.0f};
 
@@ -23,5 +20,4 @@ class PlayerClass : public Entety {
 
     void update() override;
     void playerAnimation(int maxTexturePixel, int texPositionDown);
-
 };
