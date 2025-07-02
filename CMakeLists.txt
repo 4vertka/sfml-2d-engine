@@ -21,6 +21,7 @@ add_executable(main
   ./src/tilemap.cpp
   ./src/player.cpp
   ./src/camera.cpp
+  ./src/levelState.cpp
   ${IMGUI_SRC}
 )
 

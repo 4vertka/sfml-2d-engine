@@ -20,7 +20,6 @@
 #include <new>
 #include <stdexcept>
 #include "../imgui-sfml/imgui-SFML.h"
-#include "player.hpp"
 #include <imgui.h>
 #include <string>
 
@@ -42,49 +41,20 @@ void EngineClass::initWindow() {
 }
 
 void EngineClass::mainLoop() {
+  sf::Clock clock;
   while (window.isOpen()) {
+    float deltaTime = clock.restart().asSeconds();
     while (const std::optional event = window.pollEvent()) {
       ImGui::SFML::ProcessEvent(window, *event);
 
-      if (event->is<sf::Event::Closed>()) {
-        window.close();
-      }
-      else if (const auto *keyPressed = event->getIf<sf::Event::KeyPressed>()) {
-        if (keyPressed->scancode == sf::Keyboard::Scancode::Escape) {
-          window.close();
-        }
-      }
-      if (const auto *resized = event->getIf<sf::Event::Resized>()) {
-        window.setSize({resized->size.x, resized->size.y});
-      }
+      currentState->handleInput(*this, *event);
+      
     }
-    if (cameraMode) {camera.Update();}
-    else {player.update(); camera.updateFollow(player);}
-    
-    draw();
+    currentState->update(*this, deltaTime);
+    currentState->render(*this);
   }
 
   cleanup();
-}
-
-void EngineClass::draw() {
-  window.clear(sf::Color::White);
-
-  camera.Render(window);
-  window.draw(map.vertexArray, &map.tileset);
-  //for (auto &mesh : meshes) {
-
-    //sf::RenderStates states;
-    //states.texture = &mesh.texture;
-    //states.transform = mesh.transform;
-    //window.draw(mesh.vertexArray, states);
-  //}
-  
-  map.createTileMap();
-  player.draw(window);
-
-  drawImgui();
-  window.display();
 }
 
 void EngineClass::createMeshes() {

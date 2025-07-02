@@ -7,28 +7,30 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Window/WindowEnums.hpp>
+#include <memory>
 #include <optional>
-#include "player.hpp"
-#include "camera.hpp"
+#include <utility>
+#include "state.hpp"
 
 class EngineClass {
 public:
   void initWindow();
   void mainLoop();
-  void draw();
+  //void draw();
   void createMeshes();
   void createMesh(std::string texturePath, sf::Vector2f position,
                   sf::Vector2f scale);
   void cleanup();
   void drawImgui();
 
-private:
+  void changeState(std::unique_ptr<States> newState) {currentState = std::move(newState);}
+  sf::RenderWindow& getWindow() {return window;}
+
+  bool cameraMode{false};
+protected:
   sf::RenderWindow window;
   sf::Clock deltaClock;
   std::vector<Mesh> meshes;
 
-  TileMap map;
-  PlayerClass player;
-  Camera camera;
-  bool cameraMode{false};
+  std::unique_ptr<States> currentState;
 };
