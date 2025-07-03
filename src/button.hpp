@@ -29,11 +29,11 @@ class Button {
     
     void render(sf::RenderWindow& window);
     void update(const sf::Vector2f mousePos);
+    const bool isPressed() const;
 
   private: 
     short unsigned buttonState;
     
-    const bool isPressed() const;
 
 
 };

@@ -9,7 +9,7 @@ Button::Button(float x, float y, float width, float height,
 
   this->buttonState = BUTTON_IDLE;
 
-  this->shape.setPosition(sf::Vector2f(-x, -y));
+  this->shape.setPosition(sf::Vector2f(x, y));
   this->shape.setSize(sf::Vector2f(width, height));
   this->font = font;
 
@@ -18,11 +18,11 @@ Button::Button(float x, float y, float width, float height,
   this->text->setFont(this->font);
   this->text->setString(text);
   this->text->setFillColor(sf::Color::Black);
-  this->text->setCharacterSize(12);
+  this->text->setCharacterSize(20);
 
   this->text->setPosition(sf::Vector2f(
-          this->shape.getPosition().x /2.0f - this->text->getGlobalBounds().size.x / 2.0f,
-          this->shape.getPosition().y / 2.0f - this->text->getGlobalBounds().size.y / 2.0f
+          this->shape.getPosition().x + (this->shape.getGlobalBounds().size.x / 2.0f) - this->text->getGlobalBounds().size.x / 2.0f,
+          this->shape.getPosition().y + (this->shape.getGlobalBounds().size.y / 2.0f) - this->text->getGlobalBounds().size.y / 2.0f
         ));
 
   this->idleColor = idleColor;
