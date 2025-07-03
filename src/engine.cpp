@@ -17,9 +17,12 @@
 #include <ctime>
 #include <exception>
 #include <iostream>
+#include <memory>
 #include <new>
 #include <stdexcept>
 #include "../imgui-sfml/imgui-SFML.h"
+#include "menuState.hpp"
+#include "levelState.hpp"
 #include <imgui.h>
 #include <string>
 
@@ -85,6 +88,10 @@ void EngineClass::drawImgui() {
     cameraMode = false;
   }else if (ImGui::Button("cameraMode")) {
     cameraMode = true;
+  }else if (ImGui::Button("menu state")) {
+   changeState(std::make_unique<MenuState>());
+  }else if (ImGui::Button("level state")) {
+    changeState(std::make_unique<levelState>());
   }
 
   ImGui::End();  

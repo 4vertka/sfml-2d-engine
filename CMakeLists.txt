@@ -23,6 +23,7 @@ add_executable(main
   ./src/camera.cpp
   ./src/levelState.cpp
   ./src/menuState.cpp
+  ./src/button.cpp
   ${IMGUI_SRC}
 )
 

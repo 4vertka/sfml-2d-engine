@@ -13,6 +13,7 @@
 #include <optional>
 #include <vector>
 #include "menuCamera.hpp"
+#include "button.hpp"
 
 class MenuState : public States {
 public:
@@ -23,9 +24,13 @@ public:
     void render(EngineClass& engine) override;
 private:
     sf::Font font;
-    //std::optional<std::vector<sf::Text>> texts;
-    //std::vector<std::optional<sf::Text>> texts;
-    std::vector<std::optional<sf::Text>> texts;
     MenuCamera menuCamera;
 };
+
+
+
+
+
+
+
 
