@@ -18,6 +18,7 @@
 class MenuState : public States {
 public:
     MenuState();
+    ~MenuState();
 
     void handleInput(EngineClass& engine,const sf::Event& event) override;
     void update(EngineClass& engine, float deltaTime) override;
@@ -25,6 +26,7 @@ public:
 private:
     sf::Font font;
     MenuCamera menuCamera;
+    Button* playButton;
 };
 
 

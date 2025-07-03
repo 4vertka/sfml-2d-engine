@@ -44,7 +44,9 @@ void MenuState::handleInput(EngineClass& engine,const  sf::Event& event) {
 
 void MenuState::update(EngineClass& engine, float deltaTime) {
     const sf::Vector2i mousePixelPos = sf::Mouse::getPosition(engine.getWindow());
-    sf::Vector2f mousePos = engine.getWindow().mapPixelToCoords(mousePixelPos);
+    sf::Vector2f mousePos = engine.
+        getWindow().
+        mapPixelToCoords(&mousePixelPos, &menuCamera);
     playButton->update(mousePos);
 
 }

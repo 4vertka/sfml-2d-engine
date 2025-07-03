@@ -8,6 +8,8 @@
 #include <SFML/System/Vector2.hpp>
 #include <optional>
 
+enum buttoStates{BUTTON_IDLE, BUTTON_HOVER, BUTTON_ACTIVE};
+
 class Button {
   public:
     Button(float x, float y, float width, float height,                                                           
@@ -26,10 +28,13 @@ class Button {
     sf::Color activeColor;
     
     void render(sf::RenderWindow& window);
+    void update(const sf::Vector2f mousePos);
 
   private: 
+    short unsigned buttonState;
+    
+    const bool isPressed() const;
 
-      void update(const sf::Vector2f mousePos);
 
 };
 
