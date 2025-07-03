@@ -2,22 +2,30 @@
 #include "menuState.hpp"
 #include "engine.hpp"
 #include "levelState.hpp" 
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Rect.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <memory>
 #include <stdexcept>
 
-MenuState::MenuState(): font("../textures/apercumovistarbold.ttf"), titleText(font) {
+MenuState::MenuState(): font("../textures/apercumovistarbold.ttf"), texts(2)
+{
     if (!font.openFromFile("../textures/apercumovistarbold.ttf")) {
         throw std::runtime_error("failed to load font");
     }
-    titleText.setFont(font);
-    titleText.setString("Menu");
-    titleText.setCharacterSize(40);
-    titleText.setFillColor(sf::Color::White);
-    titleText.setPosition({0, 0});
+    texts.at(0).emplace(font);
+    texts.at(0)->setString("Play");
+    texts.at(0)->setCharacterSize(24);
+    texts.at(0)->setPosition({0,0});
+
+    texts.at(1).emplace(font);
+    texts.at(1)->setString("Quit");                  
+    texts.at(1)->setCharacterSize(24);                
+    texts.at(1)->setPosition({80,80});                  
+
 
 }
 
@@ -42,7 +50,9 @@ void MenuState::render(EngineClass& engine) {
     sf::RenderWindow& window = engine.getWindow();
     window.clear(sf::Color::Black);
     menuCamera.Render(window);
-    window.draw(titleText);
+    for (int i = 0; i < texts.size(); i++) {
+        window.draw(*texts.at(i));
+    }
     engine.drawImgui();
     window.display();
 }
