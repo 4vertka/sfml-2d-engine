@@ -7,10 +7,13 @@
 Button::Button(float x, float y, float width, float height,
     sf::Font font ,std::string text, sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor) {
 
-  this->shape.setPosition(sf::Vector2f(x, y));
+  this->shape.setPosition(sf::Vector2f(-x, -y));
   this->shape.setSize(sf::Vector2f(width, height));
   this->font = font;
-  this->text.emplace(font);
+
+  //this->text->setFont(font);
+  this->text.emplace(this->font);
+  this->text->setFont(this->font);
   this->text->setString(text);
   this->text->setFillColor(sf::Color::Black);
   this->text->setCharacterSize(12);
@@ -30,8 +33,9 @@ Button::Button(float x, float y, float width, float height,
 
 Button::~Button() {}
 
-void Button::render(sf::RenderWindow* target) {
-  target->draw(this->shape);
+void Button::render(sf::RenderWindow& window) {
+  window.draw(this->shape);
+  window.draw(this->text.value());
 }
 
 

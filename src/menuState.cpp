@@ -20,15 +20,6 @@ MenuState::MenuState() {
         throw std::runtime_error("failed to load font");
     }
 
-    //texts.at(0).emplace(font);
-    //texts.at(0)->setString("Play");
-    //texts.at(0)->setCharacterSize(24);
-    //texts.at(0)->setPosition({0,0});
-
-    //texts.at(1).emplace(font);
-    //texts.at(1)->setString("Quit");                  
-    //texts.at(1)->setCharacterSize(24);                
-    //texts.at(1)->setPosition({0,80});  
 }
 
 void MenuState::handleInput(EngineClass& engine,const  sf::Event& event) {
@@ -54,8 +45,8 @@ void MenuState::render(EngineClass& engine) {
     window.clear(sf::Color::Black);
     menuCamera.Render(window);
     Button playButton =
-        Button(100, 100, 100, 50, font, "aboba", sf::Color::White, sf::Color::White, sf::Color::White);
-    playButton.render(&engine.getWindow());
+        Button(50, 50, 100, 100, font, "aboba", sf::Color::White, sf::Color::White, sf::Color::White);
+    playButton.render(window);
     engine.drawImgui();
     window.display();
 }
