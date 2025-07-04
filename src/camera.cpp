@@ -5,9 +5,12 @@
 #include <cmath>
 
 void Camera::initCamera(sf::RenderWindow& window) {
+  if (!isInitialized) {
     sf::Vector2f viewSize(sf::Vector2f(window.getSize().x, window.getSize().y));
     camera.setSize(viewSize);
     camera.setCenter(viewSize * 0.5f);
+    this->isInitialized = true;
+  }
 }
 
 void Camera::Render(sf::RenderWindow &window) { window.setView(camera); }

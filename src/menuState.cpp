@@ -72,8 +72,8 @@ void MenuState::render(EngineClass& engine) {
 }
 
 void MenuState::initButtons() {
-    this->buttons["PLAY"] = new Button(-150, 0, 300, 100, font, "Play", sf::Color::White, sf::Color::Blue, sf::Color::Green);
-    this->buttons["EXIT"] = new Button(-150, 200, 300, 100, font, "Exit", sf::Color::White, sf::Color::Blue, sf::Color::Green);
+    this->buttons["PLAY"] = new Button(800, 200, 300, 100, font, "Play", sf::Color::White, sf::Color::Blue, sf::Color::Green);
+    this->buttons["EXIT"] = new Button(800, 500, 300, 100, font, "Exit", sf::Color::White, sf::Color::Blue, sf::Color::Green);
 }
 
 void MenuState::updateButtons(EngineClass& engine,sf::Vector2f mousePos) {
@@ -101,7 +101,7 @@ void MenuState::initBackground() {
     }
 
     this->backgroundSprite.emplace(backgroundTexture);
-    this->backgroundSprite->setScale({0.1f, 0.1f});
+    this->backgroundSprite->setScale({0.3f, 0.3f});
 }
 
 void MenuState::renderBackground(sf::RenderWindow& window) {

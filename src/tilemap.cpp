@@ -20,7 +20,7 @@ bool TileMap::load(const std::filesystem::path &tilesets, sf::Vector2u tileSize,
 
       sf::Vertex *triangles = &vertexArray[(i + j * width) * 6];
 
-      float scale = 4.0f;
+      float scale = 2.0f;
 
       triangles[0].position =
           sf::Vector2f(i * tileSize.x, j * tileSize.y) * scale;
@@ -55,4 +55,5 @@ bool TileMap::load(const std::filesystem::path &tilesets, sf::Vector2u tileSize,
    if (!load("../textures/tileset_1bit.png", {16, 16}, level.data(), tileWidth, tileHeight)) {                            
      throw std::runtime_error("failed to load tilemap");                                                            
    }                                                                                                                
- }                                                                                                                  
+ }                                    
+

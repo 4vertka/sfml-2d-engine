@@ -4,6 +4,8 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <filesystem>
+#include <unordered_map>
+#include <unordered_set>
 
 class TileMap {
 public:
@@ -15,7 +17,7 @@ public:
   bool load(const std::filesystem::path &tilesets, sf::Vector2u tileSize,
             const int *tiles, unsigned int width, unsigned int height);
 
-  void createTileMap();          
+  void createTileMap();       
 
   std::vector<int> level = {                                                                          
     8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10,              

@@ -7,6 +7,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <string>
 #include "entety.hpp"
+#include "tilemap.hpp"
 
 class PlayerClass : public Entety {
   public:

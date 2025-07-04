@@ -6,11 +6,11 @@
 #include <SFML/System/Vector2.hpp>
 #include <stdexcept>
 #include <string>
-
+#include "tilemap.hpp"
 
 class Entety {
 protected:
-    sf::Vector2f position{};       
+    sf::Vector2f position{100.0f, 100.0f};       
     sf::Vector2f velocity;       
     sf::Texture texture;         
     sf::Vector2f scale{4.0f, 4.0f};          

@@ -12,6 +12,7 @@
 #include <utility>
 
 #include "player.hpp"
+#include "tilemap.hpp"
 
 void PlayerClass::playerAnimation(int maxTexturePixel, int texPositionDown) {
   timer += 0.05f;                                                      
@@ -31,8 +32,8 @@ void PlayerClass::playerAnimation(int maxTexturePixel, int texPositionDown) {
 }
 
 void PlayerClass::update()   {
-  sf::Vector2f movement(0,0);                                                         
-                                                                                             
+  sf::Vector2f movement(0,0);                  
+
   bool left = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A);                              
   bool right = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D);                             
   bool up = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W);                                
@@ -45,12 +46,14 @@ void PlayerClass::update()   {
                                                                                              
   if (movement.x != 0.0f || movement.y != 0.0f) {                                            
     float length = std::sqrt(movement.x * movement.x + movement.y * movement.y);             
-    movement /= length;                 
-    move(movement * playerSpeed);
+    movement /= length;             
+
+      move(movement * playerSpeed);
                                                                                              
     if (left)       playerAnimation(384, 448);                                              
     else if (right) playerAnimation(384, 384);                                              
     else if (up)    playerAnimation(384, 320);                                              
-    else if (down)  playerAnimation(384, 256);        
+    else if (down)  playerAnimation(384, 256);       
   }                                                                                          
 }
+

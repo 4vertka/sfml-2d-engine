@@ -83,7 +83,7 @@ void EngineClass::cleanup() {
 void EngineClass::drawImgui() {
   ImGui::SFML::Update(window, deltaClock.restart());                
                                                                     
-  ImGui::Begin("Hello world");       
+  ImGui::Begin("Control");       
   if (ImGui::Button("playerMode")) {
     cameraMode = false;
   }else if (ImGui::Button("cameraMode")) {

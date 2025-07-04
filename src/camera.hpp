@@ -18,5 +18,6 @@ public:
         sf::View camera;
 private:
         float cameraSpeed{16.0f};
+        bool isInitialized{false};
 };
 

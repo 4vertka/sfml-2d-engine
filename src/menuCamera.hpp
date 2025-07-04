@@ -24,10 +24,8 @@ public:
                 menuCamera.setCenter(menuCamera.getSize() / 2.0f);
         }
                                                      
-        sf::View menuCamera;                                 
-private:                                             
-        float cameraSpeed{16.0f};                    
-        float cameraZoom{1.0f};
+        sf::View menuCamera;                       
+
 };                                                   
                         
 
