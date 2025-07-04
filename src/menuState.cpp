@@ -3,6 +3,8 @@
 #include "button.hpp"
 #include "engine.hpp"
 #include "levelState.hpp" 
+#include "menuCamera.hpp"
+#include "state.hpp"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Rect.hpp>
@@ -14,7 +16,6 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Mouse.hpp>
-#include <algorithm>
 #include <memory>
 #include <stdexcept>
 
@@ -51,6 +52,7 @@ void MenuState::handleInput(EngineClass& engine,const  sf::Event& event) {
 }
 
 void MenuState::update(EngineClass& engine, float deltaTime) {
+    this->menuCamera.initMenuCamera(engine.getWindow());
     const sf::Vector2i mousePixelPos = sf::Mouse::getPosition(engine.getWindow());
     sf::Vector2f mousePos = engine.getWindow().mapPixelToCoords(mousePixelPos);
     this->updateButtons(engine, mousePos);

@@ -1,11 +1,13 @@
 #include "./camera.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <cmath>
 
-Camera::Camera() {
-  camera.setCenter({500.0f,500.0f});
-  camera.setSize({1920.0f, 1080.0f});
+void Camera::initCamera(sf::RenderWindow& window) {
+    sf::Vector2f viewSize(sf::Vector2f(window.getSize().x, window.getSize().y));
+    camera.setSize(viewSize);
+    camera.setCenter(viewSize * 0.5f);
 }
 
 void Camera::Render(sf::RenderWindow &window) { window.setView(camera); }
@@ -40,3 +42,7 @@ void Camera::updateFollow(Entety& object) {
   camera.setCenter({object.getPosition().x + 128, object.getPosition().y });
 }
 
+void Camera::resize(sf::Vector2f newSize) {
+  camera.setSize(newSize);
+  camera.setCenter(camera.getSize() / 2.0f);
+}

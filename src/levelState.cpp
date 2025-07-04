@@ -2,6 +2,7 @@
 #include "levelState.hpp"
 #include "engine.hpp"
 #include "menuState.hpp"
+#include <SFML/System/Vector2.hpp>
 #include <memory>
 
 void levelState::handleInput(EngineClass& engine,const sf::Event& event) {
@@ -17,11 +18,12 @@ void levelState::handleInput(EngineClass& engine,const sf::Event& event) {
     }                                                                                    
   }                                                                                            
   if (const auto *resized = event.getIf<sf::Event::Resized>()) {                              
-    engine.getWindow().setSize({resized->size.x, resized->size.y});                                        
+    camera.resize(sf::Vector2f(resized->size.x, resized->size.y));
   }
 }
 
 void levelState::update(EngineClass& engine, float deltaTime) {
+  camera.initCamera(engine.getWindow());
   if (engine.cameraMode) camera.Update();
   else {player.update();camera.updateFollow(player);}
 }
