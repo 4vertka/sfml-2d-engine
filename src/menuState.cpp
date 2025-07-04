@@ -12,6 +12,7 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/Window/Event.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <algorithm>
 #include <memory>
@@ -22,6 +23,7 @@ MenuState::MenuState() {
         throw std::runtime_error("failed to load font");
     }
     this->initButtons();
+    this->initBackground();
 
 }
 
@@ -42,7 +44,10 @@ void MenuState::handleInput(EngineClass& engine,const  sf::Event& event) {
       if (keyPressed->scancode == sf::Keyboard::Scancode::Enter) {                       
         engine.changeState(std::make_unique<levelState>());                                                       
       }
-    }                                                                                     
+    }               
+    else if (const auto* resized = event.getIf<sf::Event::Resized>()) {
+        menuCamera.Resize(sf::Vector2f(resized->size.x, resized->size.y));                                        
+    }
 }
 
 void MenuState::update(EngineClass& engine, float deltaTime) {
@@ -53,10 +58,14 @@ void MenuState::update(EngineClass& engine, float deltaTime) {
 
 void MenuState::render(EngineClass& engine) {
     sf::RenderWindow& window = engine.getWindow();
+
     window.clear(sf::Color::Black);
+
+    renderBackground(window);
     menuCamera.Render(window);
     this->renderButtons(window);
     engine.drawImgui();
+
     window.display();
 }
 
@@ -66,7 +75,6 @@ void MenuState::initButtons() {
 }
 
 void MenuState::updateButtons(EngineClass& engine,sf::Vector2f mousePos) {
-    //this->buttons["GAME_STATE"]->update(mousePos);
     for (auto& button: this->buttons) {
         button.second->update(mousePos);
     }
@@ -80,10 +88,20 @@ void MenuState::updateButtons(EngineClass& engine,sf::Vector2f mousePos) {
 }
 
 void MenuState::renderButtons(sf::RenderWindow& window) {
-    //this->buttons["GAME_STATE"]->render(window);
     for (auto& button: this->buttons) {                 
         button.second->render(window);                
-   }  
+    }
 }
 
+void MenuState::initBackground() {
+    if (!backgroundTexture.loadFromFile("../textures/pixel_art_bg.jpg")) {
+        throw std::runtime_error("failed to load texture");
+    }
 
+    this->backgroundSprite.emplace(backgroundTexture);
+    this->backgroundSprite->setScale({0.1f, 0.1f});
+}
+
+void MenuState::renderBackground(sf::RenderWindow& window) {
+    window.draw(this->backgroundSprite.value());
+}

@@ -20,8 +20,6 @@ class Button {
     sf::RectangleShape shape;
     sf::Font font;
     std::optional<sf::Text> text;
-    //sf::Text* text;
-    //sf::Text text;
 
     sf::Color idleColor;
     sf::Color hoverColor;
